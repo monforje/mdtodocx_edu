@@ -1,0 +1,10 @@
+{
+  "diagnostics.globals": [
+    "pandoc",
+    "PANDOC_VERSION",
+    "PANDOC_API_VERSION",
+    "PANDOC_SCRIPT_FILE",
+    "PANDOC_STATE"
+  ],
+  "runtime.version": "Lua 5.4"
+}
