@@ -221,11 +221,16 @@ function Pandoc(doc)
     elseif block.t == "Table" then
       -- Pass through table as-is (postprocess handles formatting)
       table.insert(new_blocks, block)
+      -- Insert empty paragraph (native Enter) after table
+      -- Use non-breaking space (UTF-8: C2 A0) so pandoc doesn't drop the empty para
+      table.insert(new_blocks,
+        pandoc.Div(pandoc.Para({pandoc.Str("\194\160")}), pandoc.Attr("", {}, {["custom-style"] = styles.main_text}))
+      )
       prev_was_table = true
 
-    elseif block.t == "Para" and not prev_was_table then
+    elseif block.t == "Para" then
       -- Wrap body paragraphs in main_text style
-      -- Skip if it's right after a table (might be a caption handled above)
+      -- (table captions already handled above by is_table_caption)
       table.insert(new_blocks,
         pandoc.Div(block, pandoc.Attr("", {}, {["custom-style"] = styles.main_text}))
       )

@@ -89,9 +89,10 @@ def _fix_table_caption(para: ET.Element) -> None:
 
 
 def _fix_image_caption(para: ET.Element) -> None:
-    """Fix an image caption paragraph: 12pt font, centered (no letter-spacing)."""
+    """Fix an image caption paragraph: 12pt font, centered, 1.5 spacing."""
     rpr = ensure_ppr_rpr(para)
     set_font_size(rpr, FontSize.PT_12)
+    set_spacing(para, Spacing.LINE_150)
 
     # Also fix each run's rPr — must be FIRST child of run (OOXML schema).
     for run in find_all(para, "r"):
