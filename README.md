@@ -15,13 +15,21 @@ python -m mdtodocx input.md output.docx --ref docx/ref.docx
 Сборка бинарника:
 
 ```bash
-uv run pyinstaller mdtodocx.spec --clean --distpath dist --workpath build
+cd mdToDocx
+uv sync --group dev          # установить PyInstaller
+uv run pyinstaller mdtodocx.spec
+```
+
+Бинарник в `dist/mdtodocx`. Скопировать в `~/.local/bin/`:
+
+```bash
+cp dist/mdtodocx ~/.local/bin/
 ```
 
 Запуск бинарника (шаблон `ref.docx` встроен):
 
 ```bash
-./dist/mdtodocx input.md output.docx
+mdtodocx input.md output.docx
 ```
 
 **Пайплайн обработки:**
